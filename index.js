@@ -15,6 +15,16 @@ function handleWatchingClick(idOfMovie){
     if(!watchingList.includes(idOfMovie)) {
         watchingList.unshift(idOfMovie)
         localStorage.setItem(`watchlist`,JSON.stringify(watchingList))
+        document.getElementById(`alarmmsg-${idOfMovie}`).textContent='You added to watching list';
+        setTimeout(function(){
+            document.getElementById(`alarmmsg-${idOfMovie}`).textContent=''
+        },1500);
+    }
+    else{
+        document.getElementById(`alarmmsg-${idOfMovie}`).textContent='It has been already added';
+        setTimeout(function(){
+            document.getElementById(`alarmmsg-${idOfMovie}`).textContent=''
+        },1500); 
     }
 }
 
@@ -82,6 +92,7 @@ async function collectImdb(imdbArray){
                             <button id="${movie.imdbID}" data-watchlistbtn="${movie.imdbID}" class="add-to-watchlist">Watching</button>
                         </div>
                     </div>
+                    <p id="alarmmsg-${movie.imdbID}" class="movie-description"></p>
                     <p id="${movie.imdbID}-plot" class="movie-description">
                         ${plot}
                     </p>
